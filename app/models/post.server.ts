@@ -1,17 +1,14 @@
-type Post = {
-  slug: string;
-  title: string;
-};
+import { prisma } from "~/db.server";
 
-export async function getPosts(): Promise<Post[]> {
-  return [
-    {
-      slug: "my-first-post",
-      title: "My First Post",
+export async function getPosts() {
+  return prisma.post.findMany();
+}
+
+export async function getPost(slug: string) {
+  // TODO infer the slug type from prisma model/client
+  return prisma.post.findUnique({
+    where: {
+      slug,
     },
-    {
-      slug: "90s-mixtape",
-      title: "A Mixtape I Made Just For You",
-    },
-  ];
+  });
 }
