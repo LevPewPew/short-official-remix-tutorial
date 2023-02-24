@@ -12,3 +12,8 @@ export async function getPost(slug: string) {
     },
   });
 }
+
+// LEFTOFF
+export async function createPost(post) {
+  return prisma.post.create({ data: post });
+}
